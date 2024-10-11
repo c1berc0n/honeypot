@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Cadastro de Administrador</title>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg">
+        <h1 class="text-xl mb-4">Cadastro de Administrador</h1>
+        <form action="../php/cadastrar.php" method="POST">
+            <input type="text" name="nome" placeholder="Nome" class="w-full p-2 mb-3 border rounded" required>
+            <input type="text" name="sobrenome" placeholder="Sobrenome" class="w-full p-2 mb-3 border rounded" required>
+            <input type="text" name="username" placeholder="Nome de usuário" class="w-full p-2 mb-3 border rounded" required>
+            <input type="email" name="email" placeholder="Email" class="w-full p-2 mb-3 border rounded" required>
+            <input type="password" name="senha" placeholder="Senha" class="w-full p-2 mb-3 border rounded" required>
+            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Cadastrar</button>
+            <p class="mt-4">Já tem uma conta? <a href="login.html" class="text-blue-500">Login</a></p>
+        </form>
+    </div>
+</body>
+</html>
