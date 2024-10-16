@@ -1,5 +1,5 @@
 <?php
-$host = "localhost"; // ou o IP do servidor de banco de dados
+$host = "154.56.40.104"; // ou o IP do servidor de banco de dados
 $username = "bed"; // usuário do banco
 $password = "my_c00L_s3cret"; // senha do usuário
 $database = "honeybd"; // nome do banco de dados
