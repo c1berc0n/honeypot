@@ -1,8 +1,8 @@
 <?php
 $host = "localhost"; // ou o IP do servidor de banco de dados
-$username = "honeypot"; // usuário do banco
-$password = "D@v1B1aEdu321!@#"; // senha do usuário
-$database = "honeypot"; // nome do banco de dados
+$username = "bed"; // usuário do banco
+$password = "my_c00L_s3cret"; // senha do usuário
+$database = "honeybd"; // nome do banco de dados
 
 // Criar conexão
 $conn = new mysqli($host, $username, $password, $database);
