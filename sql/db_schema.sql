@@ -1,15 +1,5 @@
--- -----------------------------------------------------
--- Schema honeypot
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `noneypot` DEFAULT CHARACTER SET utf8 ;
-USE `honeypot` ;
-
--- -----------------------------------------------------
--- User honeypot
--- -----------------------------------------------------
-
-CREATE USER 'honeypot' IDENTIFIED BY 'D@v1B1aEdu321!@#';
-GRANT ALL PRIVILEGES ON honeypot.* TO 'honeypot'; FLUSH PRIVILEGES;
+CREATE SCHEMA IF NOT EXISTS `honeydb` DEFAULT CHARACTER SET utf8 ;
+USE `honeydb` ;
 
 -- -----------------------------------------------------
 -- Table `honeypot`.`users`
