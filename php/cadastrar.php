@@ -15,15 +15,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT); // Hash da senha para armazenamento seguro
 
     $stmt = $conn->prepare("INSERT INTO users (nome, sobrenome, username, email, senha) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $nome, $sobrenome, $username, $email, $senha);
-
-    if ($stmt->execute()) {
-        echo "Cadastro realizado com sucesso!";
-    } else {
-        echo "Erro ao cadastrar usuário: " . $stmt->error;
+    if (!$stmt) {
+        die("Erro na preparação: " . $conn->error);
     }
-
+    $stmt->bind_param("sssss", $nome, $sobrenome, $username, $email, $senha);
+    if (!$stmt->execute()) {
+        echo "Erro ao cadastrar usuário: " . $stmt->error;
+    } else {
+        echo "Cadastro realizado com sucesso!";
+    }
     $stmt->close();
+    
 }
 
 $conn->close();

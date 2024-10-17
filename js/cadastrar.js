@@ -1,3 +1,4 @@
+/*
 // Adiciona o evento de entrada no campo de senha
 document.addEventListener("DOMContentLoaded", function() {
     var senhaField = document.getElementById('senha');
@@ -23,3 +24,4 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+*/
