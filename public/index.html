@@ -3,10 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HoneyPot - Segurança Inteligente</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <title>??? oi eduardo</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #FDF6F0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background-color: #FFB74D;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            color: #4E342E;
+        }
+
+        .nav-links a {
+            margin-right: 20px;
+            color: #4E342E;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Animação de fundo */
+        .hero {
+            background: linear-gradient(135deg, #F7B733, #fc801ac9);
+            background-size: 400% 400%;
+            animation: gradientAnimation 8s ease infinite; /* Ajuste para mover mais rápido */
+            padding: 80px 20px;
+            text-align: center;
+            color: #FFF;
+            flex-grow: 1;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        /* Botões ajustados */
+        .btn {
+            background-color: #283593; /* Azul escuro para contraste */
+            color: #FFF;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1A237E; /* Tom mais escuro ao passar o mouse */
+        }
+
+        .info-section {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .icone-colmeia {
+            width: 60px;
+            height: auto;
+            vertical-align: middle; 
+            display: inline-block;  
+            margin-right: 8px;      
+        }
+
+       
+        .info-section h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #4E342E;
+        }
+
+        .info-section p {
+            font-size: 1.1rem;
+            color: #5D4037;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .abelha {
+            width: 100px;
+            height: auto;
+            margin-right: 20px;
+            margin-top: 50px;
+        }
+
+        /* Rodapé com animação igual ao fundo */
+        .footer {
+            background: linear-gradient(135deg, #F7B733, #f0773f);
+            background-size: 400% 400%;
+            animation: gradientAnimation 8s ease infinite; /* Animação mais rápida */
+            padding: 20px;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer p {
+            color: #4E342E;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-    <h1 class="text-xl mb-4">???</h1>
+<body>
+
+    <!-- Cabeçalho -->
+    <header class="header">
+        <h1>
+            <img src="jpg/honey.jpg" alt="Ícone da Colmeia" class="icone-colmeia">
+            HoneyPot
+
+        </h1>
+        <nav class="nav-links">
+            <a href="#">Sobre</a>
+            <a href="#">Explorar</a>
+            <a href="#">Contato</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section com animação no fundo -->
+    <section class="hero">
+        <h2>Segurança Inteligente para seu Ambiente</h2>
+        <p>Capture, analise e proteja. O honeypot mais inteligente para identificar ameaças de forma proativa.</p>
+        <div>
+            <a href="login.html" class="btn">Login</a>
+            <a href="cadastrar.html" class="btn">Cadastrar</a>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div style="align-items:center;">
+            <img src="jpg/abelha.jpg" alt="abelha" class="abelha" >
+            <div>
+                <h3>Como Funciona o HoneyPot</h3>
+                <p>Nosso honeypot cria armadilhas para invasores, coletando dados valiosos sobre as tentativas de ataques. Esses dados são analisados e utilizados para fortalecer a segurança do seu ambiente.</p>
+            </div>
+        </div>
+    </section>
+    
+      
+    
+
+    <!-- Rodapé com animação no fundo -->
+    <footer class="footer">
+        <p>&copy; 2024 HoneyPot. Todos os direitos reservados.</p>
+    </footer>
+
 </body>
 </html>
