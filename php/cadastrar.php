@@ -5,7 +5,7 @@ $password = "my_c00L_s3cret"; // senha do usuário
 $database = "honeybd"; // nome do banco de dados
 
 // Criar conexão
-$conn = new mysqli($host, $username, $password, $database);
+$conn = mysqli_connect($host, $username, $password, $database, 3306);
 
 // Checar conexão
 if ($conn->connect_error) {
