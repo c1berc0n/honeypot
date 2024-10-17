@@ -1,15 +1,10 @@
 <?php
-$host = "154.56.40.104"; // ou o IP do servidor de banco de dados
-$username = "bed"; // usuário do banco
-$password = "my_c00L_s3cret"; // senha do usuário
-$database = "honeybd"; // nome do banco de dados
 
 // Criar conexão
-$conn = mysqli_connect($host, $username, $password, $database, 3306);
+$conn = mysqli_connect("154.56.40.104", "bed", "my_c00L_s3cret", "honeybd", 3306);
 
-// Checar conexão
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
+if (!$conn) {
+    die("Falha na conexão: " . mysqli_connect_error());
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
