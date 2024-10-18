@@ -14,8 +14,19 @@ def create_container():
     data = request.get_json()
     image = data.get('image')
     ports = data.get('ports')
+    name = data.get('name') 
+    restart_policy = data.get('restart_policy', 'no')  
+
+
     try:
-        container = client.containers.run(image, detach=True, ports=ports)
+        container = client.containers.run(
+            image,
+            detach=True,
+            ports=ports,
+            name=name,
+            tty=True,
+            restart_policy={"Name": restart_policy}
+        )
         return jsonify({"status": "success", "container_id": container.id}), 200
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
