@@ -1,15 +1,10 @@
 <?php
-$host = "154.56.40.104"; // ou o IP do servidor de banco de dados
-$username = "bed"; // usuário do banco
-$password = "my_c00L_s3cret"; // senha do usuário
-$database = "honeybd"; // nome do banco de dados
 
 // Criar conexão
-$conn = new mysqli($host, $username, $password, $database);
+$conn = mysqli_connect("154.56.40.104", "bed", "my_c00L_s3cret", "honeybd", 3306);
 
-// Checar conexão
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
+if (!$conn) {
+    die("Falha na conexão: " . mysqli_connect_error());
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -20,15 +15,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT); // Hash da senha para armazenamento seguro
 
     $stmt = $conn->prepare("INSERT INTO users (nome, sobrenome, username, email, senha) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $nome, $sobrenome, $username, $email, $senha);
-
-    if ($stmt->execute()) {
-        echo "Cadastro realizado com sucesso!";
-    } else {
-        echo "Erro ao cadastrar usuário: " . $stmt->error;
+    if (!$stmt) {
+        die("Erro na preparação: " . $conn->error);
     }
-
+    $stmt->bind_param("sssss", $nome, $sobrenome, $username, $email, $senha);
+    if (!$stmt->execute()) {
+        echo "Erro ao cadastrar usuário: " . $stmt->error;
+    } else {
+        echo "Cadastro realizado com sucesso!";
+    }
     $stmt->close();
+    
 }
 
 $conn->close();
