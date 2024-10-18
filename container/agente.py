@@ -7,6 +7,8 @@ import threading
 import time
 import docker
 import subprocess
+import base64
+
 
 app = Flask(__name__)
 client = docker.from_env()
@@ -68,9 +70,12 @@ def build_and_run():
     data = request.get_json()
     image_name = data.get('image_name')
     ports = data.get('ports')
-    dockerfile_content = data.get('dockerfile')
+    dockerfile_base64 = data.get('dockerfile_base64')
     name = data.get('name')
     restart_policy = data.get('restart_policy', 'no')
+
+    # Decodificar o conteúdo do Dockerfile
+    dockerfile_content = base64.b64decode(dockerfile_base64).decode('utf-8')
 
     # Criar um diretório temporário para o Dockerfile
     temp_dir = f'/tmp/{image_name}'
