@@ -6,7 +6,8 @@ app = Flask(__name__)
 client = docker.from_env()
 
 controller_ip = os.getenv("CONTROLLER_IP", "0.0.0.0")
-controller_port = int(os.getenv("CONTROLLER_PORT", "5000"))
+controller_port = int(os.getenv("CONTROLLER_PORT", "5050"))
+agent_port = int(os.getenv("AGENT_PORT", "5000"))
 
 @app.route('/create_container', methods=['POST'])
 def create_container():
@@ -24,4 +25,4 @@ def status():
     return jsonify({"status": "Agent is running"}), 200
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=controller_port)
+    app.run(host='0.0.0.0', port=agent_port)

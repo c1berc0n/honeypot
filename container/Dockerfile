@@ -7,7 +7,7 @@ WORKDIR /app
 # Instalar dependências do sistema, baixar o agente.py do GitHub, e instalar pacotes Python em uma única layer
 RUN apt-get update && \
     apt-get install -y curl && \
-    curl -o agent.py https://raw.githubusercontent.com/c1berc0n/honeypot/main/container/agente.py && \
+    curl -o agent.py https://raw.githubusercontent.com/c1berc0n/honeypot/refs/heads/main/container/agente.py && \
     pip install flask docker requests && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
