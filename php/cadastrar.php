@@ -1,7 +1,7 @@
 <?php
 
 // Criar conexão
-$conn = mysqli_connect("154.56.40.104", "bed", "my_c00L_s3cret", "honeybd", 3306);
+$conn = mysqli_connect("154.56.40.104", "bed", "my_c00L_s3cret", "honeydb", 3306);
 
 if (!$conn) {
     die("Falha na conexão: " . mysqli_connect_error());
@@ -22,7 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!$stmt->execute()) {
         echo "Erro ao cadastrar usuário: " . $stmt->error;
     } else {
-        echo "Cadastro realizado com sucesso!";
+        header("Location: ../public/metricas.html");
+        exit();
     }
     $stmt->close();
     
