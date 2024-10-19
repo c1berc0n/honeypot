@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HoneyPot - Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #FDF6F0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            background-color: #FFF;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            border-top: 8px solid #FFB74D;
+        }
+
+        .dashboard-container h1 {
+            color: #4E342E;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .dashboard-container p {
+            color: #5D4037;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .button-group a {
+            background-color: #283593;
+            color: #FFF;
+            padding: 15px;
+            width: 48%;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .button-group a:hover {
+            background-color: #1A237E;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <h1>HoneyPot - Painel do Administrador</h1>
+        <p>Bem-vindo ao painel de administração do HoneyPot. Selecione abaixo para o gerenciar o honeypot ou acessar o painel de métricas.</p>
+
+        <div class="button-group">
+            <a href="controle.html">Painel de Controle</a>
+            <a href="metricas.html">Painel de Métricas</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
     if ($row = $result->fetch_assoc()) {
         if (password_verify($senha, $row['senha'])) {
-            header("Location: ../public/metricas.html");
+            header("Location: ../public/logado.html");
             exit();
         } else {
             echo "Senha incorreta!";

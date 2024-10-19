@@ -3,18 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HoneyPot - Login de Administrador</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <title>Login de Administrador</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #FDF6F0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login-container {
+            background-color: #FFF;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            border-top: 8px solid #FFB74D;
+        }
+
+        .login-container h1 {
+            color: #4E342E;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .login-container button {
+            background-color: #283593;
+            color: #FFF;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .login-container button:hover {
+            background-color: #1A237E;
+            transform: scale(1.05);
+        }
+
+        .login-container a {
+            color: #FF7043;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animação sutil no contorno do input ao focar */
+        .login-container input:focus {
+            border-color: #FFB74D;
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 183, 77, 0.5);
+        }
+    </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="bg-white p-8 rounded-lg shadow-lg">
-        <h1 class="text-xl mb-4">Login de Administrador</h1>
+<body>
+
+    <div class="login-container">
+        <h1>Login de Administrador</h1>
         <form action="../php/login.php" method="POST">
-            <input type="text" name="username" placeholder="Nome de usuário" class="w-full p-2 mb-3 border rounded" required>
-            <input type="password" name="senha" placeholder="Senha" class="w-full p-2 mb-3 border rounded" required>
-            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Login</button>
-            <p class="mt-4">Não tem uma conta? <a href="cadastrar.html" class="text-blue-500">Cadastre-se</a></p>
+            <input type="text" name="username" placeholder="Nome de usuário" required>
+            <input type="password" name="senha" placeholder="Senha" required>
+            <button type="submit">Login</button>
         </form>
+        <p class="mt-4">Não tem uma conta? <a href="cadastrar.html">Cadastre-se</a></p>
     </div>
 
 </body>

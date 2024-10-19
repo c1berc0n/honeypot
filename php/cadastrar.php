@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!$stmt->execute()) {
         echo "Erro ao cadastrar usuário: " . $stmt->error;
     } else {
-        header("Location: ../public/metricas.html");
+        header("Location: ../public/logado.html");
         exit();
     }
     $stmt->close();
