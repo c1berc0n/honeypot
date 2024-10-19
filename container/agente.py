@@ -74,8 +74,15 @@ def build_and_run():
     name = data.get('name')
     restart_policy = data.get('restart_policy', 'no')
 
-    # Decodificar o conteúdo do Dockerfile
-    dockerfile_content = base64.b64decode(dockerfile_base64).decode('utf-8')
+    if not dockerfile_base64:
+        return jsonify({"status": "error", "message": "Missing 'dockerfile_base64' in request."}), 400
+
+    # Decode the Dockerfile content
+    try:
+        dockerfile_content = base64.b64decode(dockerfile_base64).decode('utf-8')
+    except Exception as e:
+        return jsonify({"status": "error", "message": f"Failed to decode Dockerfile: {str(e)}"}), 400
+
 
     # Criar um diretório temporário para o Dockerfile
     temp_dir = f'/tmp/{image_name}'
