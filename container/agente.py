@@ -67,6 +67,7 @@ def send_heartbeat():
         time.sleep(60)  # Envia heartbeat a cada 1 minuto
 
 # Rota para construir e executar o container
+@app.route('/build_and_run', methods=['POST'])
 def build_and_run():
     data = request.get_json()
     image_name = data.get('image_name')
