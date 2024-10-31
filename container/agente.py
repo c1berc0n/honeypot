@@ -1,3 +1,5 @@
+# agent.py
+
 import os
 import platform
 import socket
@@ -8,7 +10,7 @@ import time
 import docker
 import subprocess
 import base64
-
+import shutil
 
 app = Flask(__name__)
 client = docker.from_env()
@@ -74,15 +76,36 @@ def build_and_run():
     name = data.get('name')
     restart_policy = data.get('restart_policy', 'no')
 
-    if not dockerfile_base64:
-        return jsonify({"status": "error", "message": "Missing 'dockerfile_base64' in request."}), 400
+    # Verificar se o usuário deseja usar o Dockerfile predefinido do Tomcat
+    use_predefined = data.get('use_predefined', False)
 
-    # Decode the Dockerfile content
-    try:
-        dockerfile_content = base64.b64decode(dockerfile_base64).decode('utf-8')
-    except Exception as e:
-        return jsonify({"status": "error", "message": f"Failed to decode Dockerfile: {str(e)}"}), 400
+    if use_predefined:
+        # Usar o Dockerfile hardcoded para o Tomcat vulnerável
+        dockerfile_content = '''
+FROM ubuntu:18.04
 
+RUN apt-get update && apt-get install -y openjdk-8-jdk wget unzip && \
+    wget https://downloads.apache.org/tomcat/tomcat-9/v9.0.96/bin/apache-tomcat-9.0.96.zip -O /tmp/tomcat.zip && \
+    unzip /tmp/tomcat.zip -d /opt/ && \
+    mv /opt/apache-tomcat-9.0.96 /opt/tomcat && \
+    rm /tmp/tomcat.zip && \
+    echo '<tomcat-users>\\n  <role rolename="manager-gui"/>\\n  <role rolename="admin-gui"/>\\n  <user username="admin" password="admin" roles="manager-gui,admin-gui"/>\\n</tomcat-users>' > /opt/tomcat/conf/tomcat-users.xml && \
+    sh -c 'echo "<Context privileged=\\"true\\" antiResourceLocking=\\"false\\" docBase=\\"\${catalina.home}/webapps/manager\\">\\n  <Valve className=\\"org.apache.catalina.valves.RemoteAddrValve\\" allow=\\"^.*$\\" />\\n</Context>" > /opt/tomcat/conf/Catalina/localhost/manager.xml' && \
+    sh -c 'echo "<Context privileged=\\"true\\" antiResourceLocking=\\"false\\" docBase=\\"\${catalina.home}/webapps/host-manager\\">\\n  <Valve className=\\"org.apache.catalina.valves.RemoteAddrValve\\" allow=\\"^.*$\\" />\\n</Context>" > /opt/tomcat/conf/Catalina/localhost/host-manager.xml' && \
+    chmod +x /opt/tomcat/bin/*.sh
+
+EXPOSE 8080
+
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+        '''
+    elif dockerfile_base64:
+        # Decodificar o conteúdo do Dockerfile enviado
+        try:
+            dockerfile_content = base64.b64decode(dockerfile_base64).decode('utf-8')
+        except Exception as e:
+            return jsonify({"status": "error", "message": f"Falha ao decodificar o Dockerfile: {str(e)}"}), 400
+    else:
+        return jsonify({"status": "error", "message": "Nenhum Dockerfile fornecido."}), 400
 
     # Criar um diretório temporário para o Dockerfile
     temp_dir = f'/tmp/{image_name}'
@@ -96,7 +119,6 @@ def build_and_run():
     try:
         # Construir a imagem Docker a partir do Dockerfile
         image, logs = client.images.build(path=temp_dir, tag=image_name)
-
         # Iniciar o container com a imagem criada
         container = client.containers.run(
             image_name,
@@ -113,7 +135,7 @@ def build_and_run():
     finally:
         # Remover o diretório temporário após a execução
         if os.path.exists(temp_dir):
-            subprocess.call(['rm', '-rf', temp_dir])
+            shutil.rmtree(temp_dir)
 
 # Rota para listar containers relacionados ao honeypot
 @app.route('/list_containers', methods=['GET'])

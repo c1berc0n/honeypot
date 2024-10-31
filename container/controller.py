@@ -70,7 +70,8 @@ def deploy_container():
     # Dados necessários para o agente
     payload = {
         "image_name": data.get('image_name'),
-        "dockerfile": data.get('dockerfile'),
+        "dockerfile_base64": data.get('dockerfile_base64'),  # Opcional
+        "use_predefined": data.get('use_predefined', False),
         "ports": data.get('ports'),
         "name": data.get('name'),
         "restart_policy": data.get('restart_policy', 'no')
@@ -78,24 +79,6 @@ def deploy_container():
 
     try:
         response = requests.post(f'http://{agent_ip}:{agent_port}/build_and_run', json=payload)
-        return jsonify(response.json()), response.status_code
-    except Exception as e:
-        return jsonify({"status": "error", "message": str(e)}), 500
-
-# Rota para listar containers em execução no agente
-@app.route('/list_containers', methods=['POST'])
-def list_containers():
-    data = request.get_json()
-    agent_name = data.get('agent_name')
-    if agent_name not in registered_agents:
-        return jsonify({"status": "error", "message": "Agente não registrado."}), 400
-
-    agent_info = registered_agents[agent_name]
-    agent_ip = agent_info['agent_ip']
-    agent_port = agent_info['agent_port']
-
-    try:
-        response = requests.get(f'http://{agent_ip}:{agent_port}/list_containers')
         return jsonify(response.json()), response.status_code
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
