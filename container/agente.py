@@ -89,6 +89,7 @@ RUN apt-get update && apt-get install -y openjdk-8-jdk wget unzip && \
     mv /opt/apache-tomcat-9.0.96 /opt/tomcat && \
     rm /tmp/tomcat.zip && \
     echo '<tomcat-users>\\n  <role rolename="manager-gui"/>\\n  <role rolename="admin-gui"/>\\n  <user username="admin" password="admin" roles="manager-gui,admin-gui"/>\\n</tomcat-users>' > /opt/tomcat/conf/tomcat-users.xml && \
+    mkdir -p /opt/tomcat/conf/Catalina/localhost/ && \
     sh -c 'echo "<Context privileged=\\"true\\" antiResourceLocking=\\"false\\" docBase=\\"\${catalina.home}/webapps/manager\\">\\n  <Valve className=\\"org.apache.catalina.valves.RemoteAddrValve\\" allow=\\"^.*$\\" />\\n</Context>" > /opt/tomcat/conf/Catalina/localhost/manager.xml' && \
     sh -c 'echo "<Context privileged=\\"true\\" antiResourceLocking=\\"false\\" docBase=\\"\${catalina.home}/webapps/host-manager\\">\\n  <Valve className=\\"org.apache.catalina.valves.RemoteAddrValve\\" allow=\\"^.*$\\" />\\n</Context>" > /opt/tomcat/conf/Catalina/localhost/host-manager.xml' && \
     chmod +x /opt/tomcat/bin/*.sh
