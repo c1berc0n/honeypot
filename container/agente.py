@@ -71,7 +71,6 @@ def build_and_run():
     data = request.get_json()
     image_name = data.get('image_name')
     ports = data.get('ports')
-    dockerfile_base64 = data.get('dockerfile_base64')
     name = data.get('name')
     restart_policy = data.get('restart_policy', 'no')
 
@@ -97,14 +96,15 @@ EXPOSE 8080
 
 CMD ["/opt/tomcat/bin/catalina.sh", "run"]
         '''
-    elif dockerfile_base64:
+    else:
+        dockerfile_base64 = data.get('dockerfile_base64')
+        if not dockerfile_base64:
+            return jsonify({"status": "error", "message": "Nenhum Dockerfile fornecido."}), 400
         # Decodificar o conteúdo do Dockerfile enviado
         try:
             dockerfile_content = base64.b64decode(dockerfile_base64).decode('utf-8')
         except Exception as e:
             return jsonify({"status": "error", "message": f"Falha ao decodificar o Dockerfile: {str(e)}"}), 400
-    else:
-        return jsonify({"status": "error", "message": "Nenhum Dockerfile fornecido."}), 400
 
     # Criar um diretório temporário para o Dockerfile
     temp_dir = f'/tmp/{image_name}'
